@@ -71,23 +71,7 @@ public class CusSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         //auth.inMemoryAuthentication().withUser("admin").password("admin").roles("ADMIN").and().passwordEncoder(passwordEncoder());
-        //auth.authenticationProvider(cusAuthenticationProvider());
         auth.userDetailsService(detailsService()).passwordEncoder(passwordEncoder());
-    }
-
-    /**
-     * 自定义登录认证
-
-    @Autowired
-    public void configGlobal(AuthenticationManagerBuilder auth) throws Exception {
-               auth.inMemoryAuthentication().withUser("admin").password("admin").roles("ADMIN").and();
-        //auth.authenticationProvider(authenticationProvider());
-    }
-     */
-
-    @Bean
-    public AuthenticationProvider authenticationProvider(){
-        return new CusAuthenticationProvider();
     }
 
 
