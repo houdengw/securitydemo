@@ -5,6 +5,7 @@ import com.hdw.util.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
@@ -21,7 +22,7 @@ public class UserController {
     @Autowired
     private IUserService userService;
 
-    @RequestMapping("/list")
+    @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
     public ApiResponse userList(){
 

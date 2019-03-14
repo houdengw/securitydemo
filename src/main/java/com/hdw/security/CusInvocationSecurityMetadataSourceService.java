@@ -27,15 +27,6 @@ import java.util.List;
 @Component
 public class CusInvocationSecurityMetadataSourceService implements FilterInvocationSecurityMetadataSource {
 
-//    private static HashMap<String,Collection<ConfigAttribute>> map = null;
-//
-//    private void loadAllPermissionsAndRoles(){
-//
-//        map = new HashMap<>();
-//
-//        List<>
-//
-//    }
 
     @Autowired
     private IPermissionService permissionService;
