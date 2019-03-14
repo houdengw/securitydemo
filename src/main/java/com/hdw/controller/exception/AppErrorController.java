@@ -1,4 +1,4 @@
-package com.hdw.controller;
+package com.hdw.controller.exception;
 
 import com.hdw.util.ApiResponse;
 import org.springframework.web.bind.annotation.ControllerAdvice;

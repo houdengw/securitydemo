@@ -85,7 +85,7 @@ public class CusSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .addFilterBefore(cusFilterSecurityInterceptor, FilterSecurityInterceptor.class);
 
-        http.exceptionHandling().accessDeniedHandler(accessDeniedHandler());
+        http.csrf().disable().exceptionHandling().accessDeniedHandler(accessDeniedHandler());
     }
 
     @Override
