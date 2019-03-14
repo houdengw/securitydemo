@@ -3,11 +3,13 @@ package com.hdw.config;
 import com.hdw.handler.CusAuthenticationFailHandler;
 import com.hdw.handler.CusAuthenticationSuccessHandler;
 import com.hdw.handler.CusLogoutSuccessHandler;
-import com.hdw.service.CusUserDetailService;
+import com.hdw.handler.RestAuthenticationAccessDeniedHandler;
+import com.hdw.security.CusFilterSecurityInterceptor;
+import com.hdw.security.CusUserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.access.AccessDecisionManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -15,6 +17,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 
 /**
  * Title: evils
@@ -26,6 +30,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 @EnableWebSecurity
 public class CusSecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Autowired
+    private CusFilterSecurityInterceptor cusFilterSecurityInterceptor;
 
     @Bean
     protected PasswordEncoder passwordEncoder(){
@@ -52,6 +59,15 @@ public class CusSecurityConfig extends WebSecurityConfigurerAdapter {
         return new CusLogoutSuccessHandler();
     }
 
+    /**
+     * 无权限请求处理器
+     * @return
+     */
+    @Bean
+    public AccessDeniedHandler accessDeniedHandler(){
+        return new RestAuthenticationAccessDeniedHandler();
+    }
+
 
 
     @Override
@@ -65,7 +81,11 @@ public class CusSecurityConfig extends WebSecurityConfigurerAdapter {
                 .failureHandler(authenticationFailHandler())
                 .and()
                 .logout().logoutUrl("/logout")
-                .logoutSuccessHandler(logoutSuccessHandler());
+                .logoutSuccessHandler(logoutSuccessHandler())
+                .and()
+                .addFilterBefore(cusFilterSecurityInterceptor, FilterSecurityInterceptor.class);
+
+        http.exceptionHandling().accessDeniedHandler(accessDeniedHandler());
     }
 
     @Override

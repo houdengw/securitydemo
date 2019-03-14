@@ -27,7 +27,7 @@ public class CusAuthenticationFailHandler implements AuthenticationFailureHandle
     public void onAuthenticationFailure(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException, ServletException {
 
         httpServletResponse.setContentType("application/json;charset=UTF-8");
-        httpServletResponse.getWriter().write(objectMapper.writeValueAsString(ApiResponse.ofSuccess("退出成功")));
+        httpServletResponse.getWriter().write(objectMapper.writeValueAsString(ApiResponse.ofSuccess("认证失败")));
 
 
     }

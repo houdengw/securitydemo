@@ -27,6 +27,6 @@ public class CusLogoutSuccessHandler implements LogoutSuccessHandler {
     @Override
     public void onLogoutSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
         httpServletResponse.setContentType("application/json;charset=UTF-8");
-        httpServletResponse.getWriter().write(objectMapper.writeValueAsString(ApiResponse.ofSuccess("登录失败")));
+        httpServletResponse.getWriter().write(objectMapper.writeValueAsString(ApiResponse.ofSuccess("退出成功")));
     }
 }

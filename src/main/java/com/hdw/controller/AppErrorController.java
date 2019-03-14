@@ -24,9 +24,10 @@ public class AppErrorController {
     public  ApiResponse ErrorHandler(HttpServletRequest request,HttpServletResponse response,Exception e){
 
         if(e instanceof org.springframework.web.servlet.NoHandlerFoundException){
-
+            e.printStackTrace();
             return ApiResponse.ofStatus(ApiResponse.Status.NOT_FOUND);
         }else{
+            e.printStackTrace();
             return ApiResponse.ofStatus(ApiResponse.Status.INTERNAL_SERVER_ERROR);
         }
 

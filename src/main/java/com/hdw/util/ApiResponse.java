@@ -76,6 +76,10 @@ public class ApiResponse {
          */
         SUCCESS(200, "OK"),
         /**
+         * 成功
+         */
+        NO_AUTHORITY(403, "No Authority"),
+        /**
          * 失败的请求
          */
         BAD_REQUEST(400, "Bad Request"),
