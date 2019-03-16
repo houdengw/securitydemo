@@ -1,6 +1,6 @@
 package com.hdw.service;
 
-import com.hdw.entity.Permission;
+import com.hdw.entity.SysPermission;
 
 import java.util.List;
 
@@ -13,5 +13,5 @@ import java.util.List;
  */
 public interface IPermissionService {
 
-    List<Permission> findAll();
+    List<SysPermission> findAll();
 }

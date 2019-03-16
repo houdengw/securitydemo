@@ -11,7 +11,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="permission")
-public class Permission {
+public class SysPermission {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

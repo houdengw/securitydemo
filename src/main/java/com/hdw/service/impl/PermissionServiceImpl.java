@@ -1,6 +1,6 @@
 package com.hdw.service.impl;
 
-import com.hdw.entity.Permission;
+import com.hdw.entity.SysPermission;
 import com.hdw.repository.PermissionRepository;
 import com.hdw.service.IPermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ public class PermissionServiceImpl implements IPermissionService {
     @Autowired
     private PermissionRepository permissionRepository;
     @Override
-    public List<Permission> findAll() {
-        return (List<Permission>) permissionRepository.findAll();
+    public List<SysPermission> findAll() {
+        return (List<SysPermission>) permissionRepository.findAll();
     }
 }

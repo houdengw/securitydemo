@@ -1,6 +1,6 @@
 package com.hdw.repository;
 
-import com.hdw.entity.Role;
+import com.hdw.entity.SysRole;
 import org.springframework.data.repository.CrudRepository;
 
 /**
@@ -10,5 +10,5 @@ import org.springframework.data.repository.CrudRepository;
  * @author houdengw
  * @version 1.0
  */
-public interface RoleRepository extends CrudRepository<Role,Long> {
+public interface RoleRepository extends CrudRepository<SysRole,Long> {
 }

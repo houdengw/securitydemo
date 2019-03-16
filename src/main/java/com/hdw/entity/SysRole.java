@@ -13,7 +13,7 @@ import java.util.List;
  */
 @Entity
 @Table(name = "role")
-public class Role {
+public class SysRole {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,7 +26,7 @@ public class Role {
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "role_permission", joinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")}
             , inverseJoinColumns = {@JoinColumn(name = "permission_id", referencedColumnName = "id")})
-    private List<Permission> permissions;
+    private List<SysPermission> permissions;
 
     public Long getId() {
         return id;
@@ -60,11 +60,11 @@ public class Role {
         this.createTime = createTime;
     }
 
-    public List<Permission> getPermissions() {
+    public List<SysPermission> getPermissions() {
         return permissions;
     }
 
-    public void setPermissions(List<Permission> permissions) {
+    public void setPermissions(List<SysPermission> permissions) {
         this.permissions = permissions;
     }
 }

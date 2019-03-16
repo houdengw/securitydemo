@@ -4,6 +4,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -22,9 +24,12 @@ public class SysUser implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotBlank(message = "用户名不能为空")
     private String name;
+    @NotBlank(message = "密码不能为空")
     private String password;
     private String phone;
+    @Email
     private String email;
     @Column(name = "create_time")
     private Date createTime;
@@ -34,12 +39,12 @@ public class SysUser implements UserDetails {
     private Date lastLoginTime;
 
     @Transient
-    private  Collection<? extends GrantedAuthority> grantedAuthority;
+    private Collection<? extends GrantedAuthority> grantedAuthority;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name="user_role",joinColumns = {@JoinColumn(name="user_id",referencedColumnName = "id")}
-    ,inverseJoinColumns = {@JoinColumn(name="role_id",referencedColumnName = "id")})
-    private List<Role> roles;
+    @JoinTable(name = "user_role", joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")}
+            , inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")})
+    private List<SysRole> roles;
 
     public SysUser(String username) {
         this.name = username;
@@ -147,11 +152,11 @@ public class SysUser implements UserDetails {
         this.lastLoginTime = lastLoginTime;
     }
 
-    public List<Role> getRoles() {
+    public List<SysRole> getRoles() {
         return roles;
     }
 
-    public void setRoles(List<Role> roles) {
+    public void setRoles(List<SysRole> roles) {
         this.roles = roles;
     }
 

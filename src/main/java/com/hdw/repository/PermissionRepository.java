@@ -1,6 +1,6 @@
 package com.hdw.repository;
 
-import com.hdw.entity.Permission;
+import com.hdw.entity.SysPermission;
 import org.springframework.data.repository.CrudRepository;
 
 /**
@@ -10,5 +10,5 @@ import org.springframework.data.repository.CrudRepository;
  * @author houdengw
  * @version 1.0
  */
-public interface PermissionRepository extends CrudRepository<Permission,Long> {
+public interface PermissionRepository extends CrudRepository<SysPermission,Long> {
 }

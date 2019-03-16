@@ -1,6 +1,8 @@
 package com.hdw.controller.exception;
 
 import com.hdw.util.ApiResponse;
+import org.springframework.validation.BindException;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -24,12 +26,19 @@ public class AppErrorController {
     public  ApiResponse ErrorHandler(HttpServletRequest request,HttpServletResponse response,Exception e){
 
         if(e instanceof org.springframework.web.servlet.NoHandlerFoundException){
-            e.printStackTrace();
             return ApiResponse.ofStatus(ApiResponse.Status.NOT_FOUND);
         }else{
             e.printStackTrace();
-            return ApiResponse.ofStatus(ApiResponse.Status.INTERNAL_SERVER_ERROR);
+            return ApiResponse.ofMessage(500,e.getMessage());
         }
+
+    }
+
+    @ExceptionHandler(value = BindException.class)
+    @ResponseBody
+    public ApiResponse ValidationErrorHandler(HttpServletRequest request,HttpServletResponse response,BindException e){
+        ObjectError error = e.getBindingResult().getAllErrors().get(0);
+        return ApiResponse.ofMessage(500,error.getDefaultMessage());
 
     }
 

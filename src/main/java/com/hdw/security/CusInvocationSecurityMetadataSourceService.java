@@ -1,7 +1,6 @@
 package com.hdw.security;
 
-import com.hdw.entity.Permission;
-import com.hdw.repository.PermissionRepository;
+import com.hdw.entity.SysPermission;
 import com.hdw.service.IPermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.ConfigAttribute;
@@ -14,7 +13,6 @@ import org.springframework.stereotype.Component;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -33,9 +31,9 @@ public class CusInvocationSecurityMetadataSourceService implements FilterInvocat
     @Override
     public Collection<ConfigAttribute> getAttributes(Object o) throws IllegalArgumentException {
         Collection<ConfigAttribute> configAttributes = new ArrayList<>();
-        List<Permission> permissionList = permissionService.findAll();
+        List<SysPermission> permissionList = permissionService.findAll();
         HttpServletRequest request = ((FilterInvocation)o).getHttpRequest();
-        for(Permission permission:permissionList){
+        for(SysPermission permission:permissionList){
             String url = permission.getUrl();
             if(new AntPathRequestMatcher(url).matches(request)){
                 ConfigAttribute permissionAttribute = new SecurityConfig(permission.getName());
