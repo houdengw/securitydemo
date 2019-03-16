@@ -5,12 +5,12 @@
 <!--
     monitorInterval：Log4j能够自动检测修改配置 文件和重新配置本身，设置间隔秒数。
 -->
-<Configuration status="All" monitorInterval="30">
+<Configuration status="error" monitorInterval="30">
     <appenders>
         <!--这个输出控制台的配置-->
         <Console name="Console" target="SYSTEM_OUT">
             <!-- 控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch） -->
-            <ThresholdFilter level="All" onMatch="ACCEPT" onMismatch="DENY"/>
+            <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>
             <PatternLayout pattern="[%d{HH:mm:ss.SSS}] [%-5level] %class{36} %L %M - %msg%xEx%n"/>
         </Console>
         <!-- 文件会打印出所有信息，这个log每次重启项目会自动清空，由append属性决定，这个也挺有用的，适合临时测试用 -->
@@ -36,7 +36,7 @@
             <AppenderRef ref="log" />
         </logger> -->
         <!-- 建立一个默认的root的level是全局级别的 -->
-        <root level="debug">
+        <root level="info">
             <appender-ref ref="Console"/>
             <appender-ref ref="log"/>
             <appender-ref ref="RollingFile"/>
