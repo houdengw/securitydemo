@@ -73,6 +73,14 @@
 			<artifactId>spring-boot-starter-log4j2</artifactId>
 		</dependency>
 		<!--日志相关-->
+
+		<!--lombok-->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<!--lombok-->
 	</dependencies>
 
 	<build>

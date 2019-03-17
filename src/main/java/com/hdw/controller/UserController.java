@@ -3,6 +3,7 @@ package com.hdw.controller;
 import com.hdw.entity.SysUser;
 import com.hdw.service.IUserService;
 import com.hdw.util.ApiResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +22,8 @@ import java.util.Date;
  */
 @RestController
 @RequestMapping("/system/user")
+@Slf4j
 public class UserController {
-
-    private static Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
     private IUserService userService;
@@ -31,7 +31,7 @@ public class UserController {
     @RequestMapping(method = RequestMethod.GET)
     public ApiResponse userList(){
 
-        logger.debug("测试DEBUG级别");
+        log.debug("测试DEBUG级别");
         return  ApiResponse.ofSuccess(userService.findAll());
 
     }
@@ -39,7 +39,7 @@ public class UserController {
     @RequestMapping(method = RequestMethod.POST)
     public ApiResponse save(@Valid SysUser postUserData){
 
-        logger.info("测试slfj开始存储用户{}",postUserData.getName());
+        log.info("测试slfj开始存储用户{}",postUserData.getName());
         SysUser user = new SysUser();
         user.setName(postUserData.getName());
         user.setPassword(postUserData.getPassword());
@@ -50,7 +50,7 @@ public class UserController {
 
 
 
-        logger.info("测试slfj完成存储用户{},用户ID:{}",user.getName(),user.getId());
+        log.info("测试slfj完成存储用户{},用户ID:{}",user.getName(),user.getId());
 
         return ApiResponse.ofSuccess(user);
     }
