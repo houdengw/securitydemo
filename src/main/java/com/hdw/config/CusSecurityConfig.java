@@ -81,9 +81,9 @@ public class CusSecurityConfig extends WebSecurityConfigurerAdapter {
                 .failureHandler(authenticationFailHandler())
                 .and()
                 .logout().logoutUrl("/logout")
-                .logoutSuccessHandler(logoutSuccessHandler())
-                .and()
-                .addFilterBefore(cusFilterSecurityInterceptor, FilterSecurityInterceptor.class);
+                .logoutSuccessHandler(logoutSuccessHandler());
+//                .and()
+//                .addFilterBefore(cusFilterSecurityInterceptor, FilterSecurityInterceptor.class);
 
         http.csrf().disable().exceptionHandling().accessDeniedHandler(accessDeniedHandler());
     }

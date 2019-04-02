@@ -38,6 +38,9 @@ public class SysUser implements UserDetails {
     @Column(name = "last_login_time")
     private Date lastLoginTime;
 
+    @Column(name = "cruser")
+    private String crUser;
+
     @Transient
     private Collection<? extends GrantedAuthority> grantedAuthority;
 
@@ -166,5 +169,13 @@ public class SysUser implements UserDetails {
 
     public void setGrantedAuthority(Collection<? extends GrantedAuthority> grantedAuthority) {
         this.grantedAuthority = grantedAuthority;
+    }
+
+    public String getCrUser() {
+        return crUser;
+    }
+
+    public void setCrUser(String crUser) {
+        this.crUser = crUser;
     }
 }

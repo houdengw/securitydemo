@@ -5,12 +5,10 @@ import com.hdw.entity.SysUser;
 import com.hdw.service.IUserService;
 import com.hdw.util.ApiResponse;
 import com.hdw.util.EntityToDTO;
-import com.hdw.web.dto.SysUserDTO;
+import com.hdw.util.SecurityUtil;
+import com.hdw.entity.dto.SysUserDTO;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -52,15 +50,14 @@ public class UserController {
     @RequestMapping(method = RequestMethod.POST)
     public ApiResponse save(@Valid SysUser postUserData){
         SysUser user = new SysUser();
-        user.setName(postUserData.getName());
-        user.setPassword(postUserData.getPassword());
-        user.setEmail(postUserData.getEmail());
-        user.setPhone(postUserData.getPhone());
+        user = (SysUser) EntityToDTO.populate(postUserData,user);
         user.setCreateTime(new Date());
+        user.setCrUser(SecurityUtil.getCurrentUser());
         user = userService.saveUser(user);
+        SysUserDTO sysUserDTO =  new SysUserDTO();
+        sysUserDTO = (SysUserDTO) EntityToDTO.populate(user,sysUserDTO);
 
-
-        return ApiResponse.ofSuccess(user);
+        return ApiResponse.ofSuccess(sysUserDTO);
     }
 
 }

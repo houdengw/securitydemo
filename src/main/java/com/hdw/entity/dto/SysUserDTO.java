@@ -1,4 +1,4 @@
-package com.hdw.web.dto;
+package com.hdw.entity.dto;
 
 
 import lombok.Data;
@@ -14,5 +14,6 @@ public class SysUserDTO {
     private String phone;
     private Date createTime;
     private Date lastLoginTime;
+    private String crUser;
 
 }

@@ -85,5 +85,8 @@ CREATE TABLE `role_permission`  (
 ) ENGINE = MyISAM CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Fixed;
 
 
+alter TABLE  user add 'cruser' varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL;
+
+
 
 

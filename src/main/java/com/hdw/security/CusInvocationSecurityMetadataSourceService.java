@@ -28,23 +28,31 @@ public class CusInvocationSecurityMetadataSourceService implements FilterInvocat
 
     @Autowired
     private IPermissionService permissionService;
+
+
+    private List<SysPermission> permissionList = null;
+
+    public void loadAllPermissions() {
+        permissionList = permissionService.findAll();
+    }
+
     @Override
     public Collection<ConfigAttribute> getAttributes(Object o) throws IllegalArgumentException {
+        //如果权限list为空 先获取所有的权限
+        if (permissionList == null)
+            loadAllPermissions();
         Collection<ConfigAttribute> configAttributes = new ArrayList<>();
-        List<SysPermission> permissionList = permissionService.findAll();
-        HttpServletRequest request = ((FilterInvocation)o).getHttpRequest();
-        for(SysPermission permission:permissionList){
+        HttpServletRequest request = ((FilterInvocation) o).getHttpRequest();
+        for (SysPermission permission : permissionList) {
             String url = permission.getUrl();
-            if(new AntPathRequestMatcher(url).matches(request)){
+            if (new AntPathRequestMatcher(url).matches(request)) {
                 ConfigAttribute permissionAttribute = new SecurityConfig(permission.getName());
                 configAttributes.add(permissionAttribute);
+                //如果有匹配到对应的url 直接返回权限位
+                return configAttributes;
             }
         }
-        if(configAttributes.size()>0) {
-            return configAttributes;
-        } else {
-            return null;
-        }
+        return null;
     }
 
     @Override
